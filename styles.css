@@ -1,0 +1,244 @@
+#welcome-screen, #rules-screen, #game-screen {
+    display: none;
+}
+
+/* Overall body and background styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;    
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for the welcome screen and game screen */
+.container {
+    background: #FFF6EF;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Welcome screen style */
+#welcome-screen h1 {
+    color: #00AD8E;  /* Green for a positive, welcoming color */
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+#welcome-screen p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333; /* Darker text for clarity */
+}
+
+/* Input field and select box styles */
+input, select, button {
+    width: 80%;
+    max-width: 300px;
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #ccc;  /* Light border to separate elements */
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+/* Focus effect for input fields */
+input:focus, select:focus {
+    border-color: #00AD8E;  /* Highlight focus with a green color */
+    outline: none;
+}
+
+/* Button style */
+button {
+    background-color: #00AD8E;  /* Green button for a friendly, inviting look */
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #00AD8E;  /* Darker green on hover */
+    transform: scale(1.1);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Style for the password display box */
+#password-display {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    color: #333;
+}
+
+/* Hidden password style */
+.hidden {
+    display: none;
+}
+
+/* Message style (Correct/Incorrect feedback) */
+#message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}
+
+#message.correct {
+    color: #4CAF50;  /* Green for correct */
+}
+
+#message.incorrect {
+    color: #FF4C4C;  /* Red for incorrect */
+}
+
+/* Improved accessibility for larger screens */
+@media (min-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 600px;  /* Larger container for bigger screens */
+    }
+}
+
+/* Progress Bar Container */
+.progress-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 10px;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #00AD8E;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Apply animation */
+.container {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Full-screen landing page styles */
+#landing-page {
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background-color: #FFF6EF; /* Yellow tone white background */
+    display: flex;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center; /* Center everything vertically */
+    position: relative;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Landing container styles */
+.landing-container {
+    text-align: center;
+    color: #00AD8E;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Title at the top-left */
+.landing-title {
+    font-size: 80px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: slideInFromLeft 1s ease-out;
+}
+
+/* Button at the bottom-right corner */
+.start-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 30px;
+    background-color: #00AD8E;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    animation: buttonHover 0.5s ease-in-out infinite alternate;
+}
+
+/* Button hover animation */
+@keyframes buttonHover {
+    0% {
+        background-color: #00AD8E;
+    }
+    100% {
+        background-color: #00AD8E;
+    }
+}
+
+.start-button:hover {
+    background-color: #00AD8E;
+}
+
+/* Description text animation */
+.landing-description {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Styling for the details screen (hidden by default) */
+#details-screen {
+    display: none;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#details-screen input, #details-screen select, #details-screen button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    border-radius: 5px;
+}
