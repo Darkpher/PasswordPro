@@ -99,7 +99,7 @@ function startLevel() {
     setTimeout(() => {
         document.getElementById("password-display").textContent = "******"; // Hide password
         document.getElementById("user-input").disabled = false; // Enable input field
-    }, 2000); // Show password for 15 seconds
+    }, 15000); // Show password for 15 seconds
 }
 
 function updateProgress() {
