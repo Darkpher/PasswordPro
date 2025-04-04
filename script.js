@@ -60,7 +60,7 @@ function checkPassword() {
                 startLevel();
                 updateProgress();  // ✅ Make sure to update progress bar
                 document.getElementById("user-input").value = ""; // ✅ Clear input box
-            }, 0);
+            }, );
         } else {
             document.getElementById("message").textContent = "🎉 Congratulations! You've completed all levels! You are now PasswordPro ,Keep practicing regularly to reduce the risk of Alzheimer's and maintain your memory.";
             updateProgress(); // Ensure progress bar reaches 100%
