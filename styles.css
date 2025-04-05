@@ -1,14 +1,17 @@
 :root {
-    --cream: #FFF0DC;
-    --peach: #F0BB78;
-    --brown: #543A14;
-    --dark-brown: #131010;
-    --shadow: rgba(19, 16, 16, 0.3);
-    --gradient-start: #543A14;
-    --gradient-end: #131010;
-    --highlight: #F0BB78;
-    --text-light: #FFF0DC;
-    --text-dark: #131010;
+    --cream: #FFF8EA;
+    --light-brown: #9E7676;
+    --medium-brown: #815B5B;
+    --dark-brown: #594545;
+    --shadow: rgba(89, 69, 69, 0.3);
+    --gradient-start: #815B5B;
+    --gradient-end: #594545;
+    --highlight: #FFF8EA;
+    --text-light: #FFF8EA;
+    --text-dark: #594545;
+    --accent-1: #FF9F9F;
+    --accent-2: #FFB4B4;
+    --accent-3: #FFD1D1;
 }
 
 #welcome-screen, #rules-screen, #game-screen {
@@ -34,15 +37,132 @@ body {
     transition: background-color 0.5s ease;
     overflow-x: hidden;
     perspective: 1000px;
+    position: relative;
+}
+
+/* Animated background gradient */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg, 
+        var(--gradient-start) 0%, 
+        var(--medium-brown) 25%, 
+        var(--light-brown) 50%, 
+        var(--accent-1) 75%, 
+        var(--gradient-end) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: -2;
+    opacity: 0.7;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating particles */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 248, 234, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 15s infinite linear;
+}
+
+.particle:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 10%;
+    background-color: rgba(255, 159, 159, 0.2);
+    animation-duration: 20s;
+}
+
+.particle:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    right: 15%;
+    background-color: rgba(255, 180, 180, 0.2);
+    animation-duration: 18s;
+}
+
+.particle:nth-child(3) {
+    width: 40px;
+    height: 40px;
+    bottom: 15%;
+    left: 20%;
+    background-color: rgba(255, 209, 209, 0.2);
+    animation-duration: 22s;
+}
+
+.particle:nth-child(4) {
+    width: 70px;
+    height: 70px;
+    bottom: 10%;
+    right: 10%;
+    background-color: rgba(255, 248, 234, 0.2);
+    animation-duration: 19s;
+}
+
+.particle:nth-child(5) {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    background-color: rgba(255, 159, 159, 0.2);
+    animation-duration: 21s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 /* Container for the welcome screen and game screen */
 .container {
-    background-color: var(--brown);
+    background-color: rgba(89, 69, 69, 0.85);
     padding: 2.5rem;
     border-radius: 15px;
     box-shadow: 0 20px 50px var(--shadow), 
-                0 0 20px rgba(240, 187, 120, 0.2);
+                0 0 20px rgba(255, 248, 234, 0.2);
     max-width: 500px;
     width: 90%;
     text-align: center;
@@ -51,6 +171,8 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     transform-style: preserve-3d;
     transform: rotateX(5deg) rotateY(5deg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 248, 234, 0.1);
 }
 
 .container::before {
@@ -60,7 +182,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(240, 187, 120, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 248, 234, 0.1) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
@@ -69,7 +191,7 @@ body {
 .container:hover {
     transform: rotateX(0deg) rotateY(0deg) translateY(-5px);
     box-shadow: 0 25px 60px var(--shadow), 
-                0 0 30px rgba(240, 187, 120, 0.3);
+                0 0 30px rgba(255, 248, 234, 0.3);
 }
 
 .container:hover::before {
@@ -84,7 +206,7 @@ body {
     letter-spacing: 1px;
     position: relative;
     display: inline-block;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 #welcome-screen h1::after {
@@ -97,13 +219,13 @@ body {
     height: 3px;
     background: var(--highlight);
     border-radius: 3px;
-    box-shadow: 0 2px 5px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 2px 5px rgba(89, 69, 69, 0.3);
 }
 
 #welcome-screen p {
     margin-bottom: 1.2rem;
     line-height: 1.6;
-    color: rgba(255, 240, 220, 0.9);
+    color: rgba(255, 248, 234, 0.9);
 }
 
 /* Input field and select box styles */
@@ -118,22 +240,22 @@ input, select, button {
 }
 
 input, select {
-    background-color: rgba(19, 16, 16, 0.7);
+    background-color: rgba(89, 69, 69, 0.7);
     color: var(--text-light);
-    border: 1px solid rgba(240, 187, 120, 0.3);
-    box-shadow: inset 0 2px 5px rgba(19, 16, 16, 0.3);
+    border: 1px solid rgba(255, 248, 234, 0.3);
+    box-shadow: inset 0 2px 5px rgba(89, 69, 69, 0.3);
 }
 
 input:focus, select:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--highlight), 
-                inset 0 2px 5px rgba(19, 16, 16, 0.3);
+                inset 0 2px 5px rgba(89, 69, 69, 0.3);
     border-color: var(--highlight);
 }
 
 /* Button style */
 button {
-    background: linear-gradient(135deg, var(--highlight), var(--brown));
+    background: linear-gradient(135deg, var(--highlight), var(--medium-brown));
     color: var(--text-dark);
     cursor: pointer;
     font-weight: 500;
@@ -142,7 +264,7 @@ button {
     position: relative;
     overflow: hidden;
     z-index: 1;
-    box-shadow: 0 5px 15px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 5px 15px rgba(89, 69, 69, 0.3);
     transform: translateZ(10px);
 }
 
@@ -160,7 +282,7 @@ button::before {
 
 button:hover {
     transform: translateY(-3px) translateZ(15px);
-    box-shadow: 0 8px 20px rgba(19, 16, 16, 0.4);
+    box-shadow: 0 8px 20px rgba(89, 69, 69, 0.4);
 }
 
 button:hover::before {
@@ -172,17 +294,18 @@ button:hover::before {
     font-size: 2.5rem;
     margin: 2rem 0;
     padding: 1.5rem;
-    background-color: rgba(19, 16, 16, 0.7);
+    background-color: rgba(89, 69, 69, 0.7);
     border-radius: 15px;
     letter-spacing: 5px;
     color: var(--highlight);
-    border: 1px solid rgba(240, 187, 120, 0.3);
-    box-shadow: 0 10px 25px rgba(19, 16, 16, 0.4), 
-                inset 0 2px 5px rgba(19, 16, 16, 0.3);
+    border: 1px solid rgba(255, 248, 234, 0.3);
+    box-shadow: 0 10px 25px rgba(89, 69, 69, 0.4), 
+                inset 0 2px 5px rgba(89, 69, 69, 0.3);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     transform: translateZ(20px);
+    backdrop-filter: blur(5px);
 }
 
 #password-display::before {
@@ -192,7 +315,7 @@ button:hover::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(240, 187, 120, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 248, 234, 0.1) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
@@ -200,9 +323,9 @@ button:hover::before {
 
 #password-display:hover {
     transform: scale(1.02) translateZ(25px);
-    border-color: rgba(240, 187, 120, 0.5);
-    box-shadow: 0 15px 35px rgba(19, 16, 16, 0.5), 
-                inset 0 2px 5px rgba(19, 16, 16, 0.3);
+    border-color: rgba(255, 248, 234, 0.5);
+    box-shadow: 0 15px 35px rgba(89, 69, 69, 0.5), 
+                inset 0 2px 5px rgba(89, 69, 69, 0.3);
 }
 
 #password-display:hover::before {
@@ -215,7 +338,7 @@ button:hover::before {
     margin: 1.2rem 0;
     min-height: 1.5rem;
     transition: all 0.3s ease;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 #message.correct {
@@ -232,24 +355,24 @@ button:hover::before {
 .progress-container {
     width: 100%;
     height: 10px;
-    background-color: rgba(19, 16, 16, 0.7);
+    background-color: rgba(89, 69, 69, 0.7);
     border-radius: 10px;
     margin-top: 2rem;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 2px 5px rgba(19, 16, 16, 0.3);
+    box-shadow: inset 0 2px 5px rgba(89, 69, 69, 0.3);
     transform: translateZ(5px);
 }
 
 /* Progress Bar */
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--highlight), var(--brown));
+    background: linear-gradient(90deg, var(--highlight), var(--medium-brown));
     width: 0%;
     transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(240, 187, 120, 0.5);
+    box-shadow: 0 0 10px rgba(255, 248, 234, 0.5);
 }
 
 .progress-bar::after {
@@ -326,7 +449,7 @@ button:hover::before {
     color: var(--text-light);
     font-weight: 700;
     letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(240, 187, 120, 0.5);
+    text-shadow: 0 0 10px rgba(255, 248, 234, 0.5);
     position: relative;
     display: inline-block;
     transform: translateZ(30px);
@@ -342,12 +465,12 @@ button:hover::before {
     height: 4px;
     background: var(--highlight);
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 2px 5px rgba(89, 69, 69, 0.3);
 }
 
 /* Button at the bottom-right corner */
 .start-button {
-    background: linear-gradient(135deg, var(--highlight), var(--brown));
+    background: linear-gradient(135deg, var(--highlight), var(--medium-brown));
     color: var(--text-dark);
     padding: 1.2rem 3rem;
     border: none;
@@ -358,7 +481,7 @@ button:hover::before {
     position: relative;
     overflow: hidden;
     z-index: 1;
-    box-shadow: 0 5px 15px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 5px 15px rgba(89, 69, 69, 0.3);
     transform: translateZ(20px);
 }
 
@@ -376,7 +499,7 @@ button:hover::before {
 
 .start-button:hover {
     transform: translateY(-5px) scale(1.05) translateZ(25px);
-    box-shadow: 0 10px 25px rgba(19, 16, 16, 0.4);
+    box-shadow: 0 10px 25px rgba(89, 69, 69, 0.4);
 }
 
 .start-button:hover::before {
@@ -387,7 +510,7 @@ button:hover::before {
 .landing-description {
     font-size: 1.3rem;
     margin-bottom: 2.5rem;
-    color: rgba(255, 240, 220, 0.9);
+    color: rgba(255, 248, 234, 0.9);
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -408,9 +531,9 @@ button:hover::before {
 #details-screen {
     display: none;
     padding: 20px;
-    background-color: var(--brown);
+    background-color: var(--dark-brown);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 0 10px rgba(89, 69, 69, 0.3);
 }
 
 #details-screen input, #details-screen select, #details-screen button {
@@ -485,7 +608,7 @@ button:hover::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(19, 16, 16, 0.8);
+    background-color: rgba(89, 69, 69, 0.8);
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
@@ -494,18 +617,19 @@ button:hover::before {
 }
 
 .popup-content {
-    background-color: rgba(84, 58, 20, 0.95);
+    background-color: rgba(89, 69, 69, 0.95);
     padding: 2.5rem;
     border-radius: 20px;
     text-align: center;
     max-width: 90%;
     width: 450px;
-    border: 1px solid rgba(240, 187, 120, 0.3);
+    border: 1px solid rgba(255, 248, 234, 0.3);
     box-shadow: 0 15px 40px var(--shadow), 
-                0 0 20px rgba(240, 187, 120, 0.2);
+                0 0 20px rgba(255, 248, 234, 0.2);
     animation: popup-appear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
     transform: translateZ(50px);
+    backdrop-filter: blur(10px);
 }
 
 @keyframes popup-appear {
@@ -524,7 +648,7 @@ button:hover::before {
     margin-bottom: 20px;
     font-weight: 300;
     letter-spacing: 1px;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 .popup-content p {
@@ -536,7 +660,7 @@ button:hover::before {
 
 .popup-content button {
     margin-top: 20px;
-    background-color: var(--brown);
+    background-color: var(--dark-brown);
     color: var(--text-light);
     border: 1px solid var(--highlight);
     padding: 12px 25px;
@@ -560,7 +684,7 @@ button:hover::before {
     font-weight: 300;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 #level-text {
@@ -575,7 +699,7 @@ button:hover::before {
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: 300;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 /* Rules screen specific styles */
@@ -584,7 +708,7 @@ button:hover::before {
     font-weight: 300;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 #rules-screen p {
@@ -606,7 +730,7 @@ button:hover::before {
     font-weight: 300;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    text-shadow: 0 2px 5px rgba(19, 16, 16, 0.5);
+    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
 }
 
 #welcome-screen p {
@@ -652,54 +776,18 @@ button:hover::before {
     border-radius: 0 0 5px 5px;
 }
 
-/* New feature: Floating particles background */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    background-color: rgba(240, 187, 120, 0.2);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: float 15s infinite linear;
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-100vh) translateX(100px);
-        opacity: 0;
-    }
-}
-
 /* New feature: Level badge */
 .level-badge {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, var(--highlight), var(--brown));
+    background: linear-gradient(135deg, var(--highlight), var(--medium-brown));
     color: var(--text-dark);
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 500;
-    box-shadow: 0 3px 10px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 3px 10px rgba(89, 69, 69, 0.3);
     z-index: 10;
     transform: translateZ(15px);
 }
@@ -813,11 +901,11 @@ button:hover::before {
 /* Progress bar */
 .progress-bar {
     height: 8px;
-    background-color: rgba(19, 16, 16, 0.7);
+    background-color: rgba(89, 69, 69, 0.7);
     border-radius: 4px;
     overflow: hidden;
     margin: 0;
-    box-shadow: inset 0 2px 5px rgba(19, 16, 16, 0.3);
+    box-shadow: inset 0 2px 5px rgba(89, 69, 69, 0.3);
 }
 
 .progress-bar-fill {
@@ -825,7 +913,7 @@ button:hover::before {
     background-color: var(--highlight);
     width: 0%;
     transition: width 0.3s ease;
-    box-shadow: 0 0 10px rgba(240, 187, 120, 0.5);
+    box-shadow: 0 0 10px rgba(255, 248, 234, 0.5);
 }
 
 /* Game buttons */
@@ -836,27 +924,29 @@ button:hover::before {
 
 /* Input groups */
 .input-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
     position: relative;
-    }
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
 
-    .input-group i {
+.input-group i {
     position: absolute;
-    left: 20px;
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--highlight);
     font-size: 1.2rem;
+    pointer-events: none;
     z-index: 2;
 }
 
-    .input-group input,
-    .input-group select {
-    padding-left: 50px;
+.input-group input,
+.input-group select {
+    padding-left: 45px;
     width: 100%;
     box-sizing: border-box;
-    background-color: rgba(19, 16, 16, 0.9);
+    height: 50px; /* Set a fixed height for consistency */
+    line-height: 50px; /* Match the height to center text vertically */
 }
 
 /* Remove difficulty selector styles */
@@ -896,7 +986,7 @@ button:hover::before {
 .ripple-effect {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 240, 220, 0.4);
+    background: rgba(255, 248, 234, 0.4);
     transform: scale(0);
     animation: ripple 1s linear;
     pointer-events: none;
@@ -964,7 +1054,7 @@ button:hover::before {
 
 @keyframes success-pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(240, 187, 120, 0.5); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 248, 234, 0.5); }
     100% { transform: scale(1); }
 }
 
@@ -973,13 +1063,13 @@ button:hover::before {
     position: absolute;
     top: 20px;
     left: 20px;
-    background: linear-gradient(135deg, var(--highlight), var(--brown));
+    background: linear-gradient(135deg, var(--highlight), var(--medium-brown));
     color: var(--text-dark);
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 1.2rem;
     font-weight: 600;
-    box-shadow: 0 3px 10px rgba(19, 16, 16, 0.3);
+    box-shadow: 0 3px 10px rgba(89, 69, 69, 0.3);
     z-index: 10;
     transform: translateZ(15px);
     min-width: 40px;
