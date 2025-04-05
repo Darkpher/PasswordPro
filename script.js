@@ -13,6 +13,9 @@ let timerInterval;
 let timeLeft;
 let timerDisplay = document.getElementById('timer');
 
+// Add a global variable to track popup state
+let isPopupVisible = false;
+
 // Reset form fields when page loads
 window.addEventListener('DOMContentLoaded', function() {
     // Reset input fields
@@ -260,24 +263,17 @@ function checkPassword() {
     }
 }
 
-// Add event listener for Enter key press
+// Modify the Enter key event listener to use the global popup state
 document.getElementById("user-input").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-        // Check if any popup is visible before checking password
-        const levelPopup = document.getElementById("level-popup");
-        const hintPopup = document.getElementById("hint-popup");
-        const gameOverPopup = document.getElementById("game-over-popup");
-        
-        // Only check password if all popups are hidden
-        if (levelPopup.classList.contains("hidden") && 
-            hintPopup.classList.contains("hidden") && 
-            gameOverPopup.classList.contains("hidden")) {
+        // Only check password if no popup is visible
+        if (!isPopupVisible) {
             checkPassword();
         }
     }
 });
 
-// Level transition popup functions
+// Modify the showLevelPopup function to set the popup state
 function showLevelPopup(timeTaken, completedLevel) {
     // Calculate accuracy
     const accuracy = Math.round((correctAttempts / attempts) * 100);
@@ -291,6 +287,9 @@ function showLevelPopup(timeTaken, completedLevel) {
     // Show popup
     const levelPopup = document.getElementById("level-popup");
     levelPopup.classList.remove("hidden");
+    
+    // Set popup state to visible
+    isPopupVisible = true;
 }
 
 // Get level description
@@ -316,10 +315,14 @@ function getLevelDescription(level) {
     return descriptions[Math.min(level, descriptions.length - 1)];
 }
 
+// Modify the closeLevelPopup function to reset the popup state
 function closeLevelPopup() {
     // Hide the popup
     const levelPopup = document.getElementById("level-popup");
     levelPopup.classList.add("hidden");
+    
+    // Reset popup state
+    isPopupVisible = false;
     
     // Check if game is complete
     if (currentLevelIndex >= levels.length) {
@@ -339,7 +342,7 @@ function updateProgress() {
     document.getElementById("progress-bar").style.width = progress + "%";
 }
 
-// Show hint popup
+// Modify the showHint function to set the popup state
 function showHint() {
     // Generate a hint based on the current password
     let hintText = "";
@@ -368,11 +371,17 @@ function showHint() {
     
     // Show hint popup
     document.getElementById("hint-popup").classList.remove("hidden");
+    
+    // Set popup state to visible
+    isPopupVisible = true;
 }
 
-// Close hint popup
+// Modify the closeHintPopup function to reset the popup state
 function closeHintPopup() {
     document.getElementById("hint-popup").classList.add("hidden");
+    
+    // Reset popup state
+    isPopupVisible = false;
 }
 
 // Modify the restartGame function to reset the timer
@@ -404,7 +413,7 @@ function setTimerDuration(seconds) {
     }
 }
 
-// Add completion effect when finishing the game
+// Modify the showGameOverPopup function to set the popup state
 function showGameOverPopup() {
     // Calculate total time
     const totalTime = Math.round((Date.now() - startTime) / 1000);
@@ -418,6 +427,9 @@ function showGameOverPopup() {
     
     // Show popup
     document.getElementById("game-over-popup").classList.remove("hidden");
+    
+    // Set popup state to visible
+    isPopupVisible = true;
     
     // Create confetti effect
     createConfetti();
@@ -501,7 +513,7 @@ function playSound(type) {
     audio.play().catch(e => console.log("Audio play failed:", e));
 }
 
-// Special popup for completing A1 level
+// Modify the showA1CompletionPopup function to set the popup state
 function showA1CompletionPopup(timeTaken) {
     // Calculate accuracy
     const accuracy = Math.round((correctAttempts / attempts) * 100);
@@ -514,6 +526,9 @@ function showA1CompletionPopup(timeTaken) {
     
     // Show popup
     document.getElementById("level-popup").classList.remove("hidden");
+    
+    // Set popup state to visible
+    isPopupVisible = true;
     
     // Create extra special effects
     createFireworks();
