@@ -5,54 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Memory Trainer</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Floating particles background -->
+    <div class="particles" id="particles"></div>
+    
     <!-- Landing Page (First Page) -->
     <div id="landing-page">
         <div class="landing-container">
-            <h1 class="landing-title" id="typewriter-text">Welcome to PasswordPro</h1>
-            <p class="landing-description">A fun and easy way to train your memory with password creation exercises.</p>
-            <button id="start-button" class="start-button">Start</button>
+            <h1 class="landing-title" id="typewriter-text">PasswordPro</h1>
+            <p class="landing-description">A mindful approach to memory training</p>
+            <button id="start-button" class="start-button">Begin</button>
         </div>
     </div>
     
-    <div class="container hidden" id="welcome-screen">
-        <h1>Welcome to PasswordPro</h1>
+    <div class="container" id="welcome-screen">
+        <h1>Welcome</h1>
         <p>Please enter your details:</p>
-        <input type="text" id="name" placeholder="Enter your name">
-        <input type="number" id="age" placeholder="Enter your age">
+        <div class="input-group">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="name" placeholder="Your name">
+        </div>
+        <div class="input-group">
+            <i class="fas fa-birthday-cake input-icon"></i>
+            <input type="number" id="age" placeholder="Your age">
+        </div>
+        <div class="input-group">
+            <i class="fas fa-venus-mars input-icon"></i>
             <select id="gender">
-            <option value="" disabled selected>Select Gender</option>
+                <option value="" disabled selected>Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
+                <option value="Other">Other</option>
             </select>
-        <button onclick="startGame()">Start</button>
+        </div>
+        <button onclick="startGame()">Continue</button>
     </div>
 
-    <div class="container hidden" id="rules-screen">
-        <h1>Game Rules</h1>
-        <p>This game will help you train your memory.</p>
-        <p>Rules:</p>
-        <ul>
-            <li>You will see a password for 15 seconds.</li>
-            <li>After that, the password will be hidden.</li>
-            <li>You must type the password correctly to move to the next level.</li>
-            <li>If you get it wrong, you will start over.</li>
-        </ul>
-        <button onclick="showGame()">Continue</button>
+    <!-- Rules Screen -->
+    <div id="rules-screen" class="container">
+        <h1>Guidelines</h1>
+        <p>This exercise will help you train your memory</p>
+        <p>You will be shown a password for a set amount of time</p>
+        <p>After the password disappears, you need to enter it correctly</p>
+        <p>Each level will increase in difficulty</p>
+        <p>Good luck!</p>
+        
+        <button onclick="showGame()">Begin Exercise</button>
     </div>
 
-    <div class="container hidden" id="game-screen">
-        <h1>Password Memory Trainer</h1>
+    <div class="container" id="game-screen">
+        <div class="timer" id="timer">15</div>
+        <div class="level-badge" id="level-badge">Level: E3</div>
+        <h1>Password Memory</h1>
         <p id="user-greeting"></p>
         <p id="level-text">Level: E3</p>
         <div class="password" id="password-display">******</div>
-        <input type="text" id="user-input" placeholder="Enter password">
+        <div class="input-group">
+            <i class="fas fa-key input-icon"></i>
+            <input type="text" id="user-input" placeholder="Enter password">
+        </div>
         <button onclick="checkPassword()">Submit</button>
         <p id="message"></p>
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
-        </div>    
+        </div>
+        <div class="game-controls">
+            <button class="control-btn" id="hint-btn"><i class="fas fa-lightbulb"></i> Hint</button>
+            <button class="control-btn" id="restart-btn"><i class="fas fa-redo"></i> Restart</button>
+        </div>
+    </div>
+
+    <!-- Level Transition Popup -->
+    <div id="level-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Level Complete</h2>
+            <p id="level-info"></p>
+            <p id="level-description"></p>
+            <div class="stats-container">
+                <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    <span id="time-taken">0s</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-star"></i>
+                    <span id="accuracy">100%</span>
+                </div>
+            </div>
+            <button onclick="closeLevelPopup()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Hint Popup -->
+    <div id="hint-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Hint</h2>
+            <p id="hint-text">The first character is a number.</p>
+            <button onclick="closeHintPopup()">Got it</button>
+        </div>
+    </div>
+
+    <!-- Game Over Popup -->
+    <div id="game-over-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Game Over</h2>
+            <p>Would you like to try again?</p>
+            <div class="stats-container">
+                <div class="stat">
+                    <i class="fas fa-trophy"></i>
+                    <span id="final-level">Level: E3</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    <span id="total-time">0s</span>
+                </div>
+            </div>
+            <div class="popup-buttons">
+                <button onclick="restartGame()">Restart</button>
+                <button onclick="showWelcomeScreen()">Exit</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script> 
