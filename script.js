@@ -71,7 +71,7 @@ function startGame() {
 
 function showGame() {
     // Set a fixed timer duration
-    setTimerDuration(10);
+    setTimerDuration(2);
     
     // Hide rules screen
     document.getElementById('rules-screen').style.display = 'none';
