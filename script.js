@@ -193,6 +193,8 @@ function checkPassword() {
         document.getElementById('message').classList.add('correct');
         document.getElementById('message').classList.remove('incorrect');
         
+        isPopupVisible = true;
+        
         // Add success animation
         document.getElementById('password-display').classList.add('success-animation');
         setTimeout(() => {
