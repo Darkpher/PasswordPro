@@ -71,7 +71,7 @@ function startGame() {
 
 function showGame() {
     // Set a fixed timer duration
-    setTimerDuration(15);
+    setTimerDuration(2);
     
     // Hide rules screen
     document.getElementById('rules-screen').style.display = 'none';
@@ -268,10 +268,10 @@ document.getElementById("user-input").addEventListener("keydown", function(event
         const hintPopup = document.getElementById("hint-popup");
         const gameOverPopup = document.getElementById("game-over-popup");
         
-        // Only check password if no popups are visible
-        if (!levelPopup.classList.contains("show") && 
-            !hintPopup.classList.contains("show") && 
-            !gameOverPopup.classList.contains("show")) {
+        // Only check password if all popups are hidden
+        if (levelPopup.classList.contains("hidden") && 
+            hintPopup.classList.contains("hidden") && 
+            gameOverPopup.classList.contains("hidden")) {
             checkPassword();
         }
     }
@@ -291,7 +291,6 @@ function showLevelPopup(timeTaken, completedLevel) {
     // Show popup
     const levelPopup = document.getElementById("level-popup");
     levelPopup.classList.remove("hidden");
-    levelPopup.classList.add("show");
 }
 
 // Get level description
@@ -321,7 +320,6 @@ function closeLevelPopup() {
     // Hide the popup
     const levelPopup = document.getElementById("level-popup");
     levelPopup.classList.add("hidden");
-    levelPopup.classList.remove("show");
     
     // Check if game is complete
     if (currentLevelIndex >= levels.length) {
