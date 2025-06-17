@@ -125,6 +125,15 @@ function showGame() {
     // Set user greeting
     document.getElementById('user-greeting').textContent = `Welcome, ${userName}! Let's begin.`;
     
+    // Add event listeners for hint and restart buttons
+    document.getElementById('hint-btn').addEventListener('click', function() {
+        showHint();
+    });
+    
+    document.getElementById('restart-btn').addEventListener('click', function() {
+        restartGame();
+    });
+    
     // Start the game
     startLevel();
 }
@@ -391,36 +400,28 @@ function updateProgress() {
 
 // Modify the showHint function to set the popup state
 function showHint() {
-    // Generate a hint based on the current password
-    let hintText = "";
+    if (isPopupVisible) return; // Don't show hint if a popup is visible
     
+    const hintPopup = document.getElementById('hint-popup');
+    const hintText = document.getElementById('hint-text');
+    
+    // Generate a hint based on the current password
+    let hint = '';
     if (currentPassword.length > 0) {
-        // Show first character type
-        const firstChar = currentPassword.charAt(0);
-        if (/[0-9]/.test(firstChar)) {
-            hintText = "The first character is a number.";
+        const firstChar = currentPassword[0];
+        if (/\d/.test(firstChar)) {
+            hint = 'The first character is a number.';
         } else if (/[a-z]/.test(firstChar)) {
-            hintText = "The first character is a lowercase letter.";
+            hint = 'The first character is a lowercase letter.';
         } else if (/[A-Z]/.test(firstChar)) {
-            hintText = "The first character is an uppercase letter.";
+            hint = 'The first character is an uppercase letter.';
         } else {
-            hintText = "The first character is a special character.";
+            hint = 'The first character is a special symbol.';
         }
-        
-        // Add length hint
-        hintText += ` The password is ${currentPassword.length} characters long.`;
-    } else {
-        hintText = "Generate a new password first.";
     }
     
-    // Update hint text
-    document.getElementById("hint-text").textContent = hintText;
-    
-    // Show hint popup
-    document.getElementById("hint-popup").classList.remove("hidden");
-    
-    // Set popup state to visible
-    isPopupVisible = true;
+    hintText.textContent = hint;
+    hintPopup.classList.remove('hidden');
 }
 
 // Modify the closeHintPopup function to reset the popup state
@@ -433,22 +434,22 @@ function closeHintPopup() {
 
 // Modify the restartGame function to reset the timer
 function restartGame() {
-    // Reset game variables
+    // Reset game state
     currentLevelIndex = 0;
+    hintsUsed = 0;
     attempts = 0;
     correctAttempts = 0;
     
-    // Stop any running timer
+    // Clear any existing timers
     stopTimer();
     
-    // Hide all popups
-    document.getElementById('level-popup').classList.add('hidden');
-    document.getElementById('hint-popup').classList.add('hidden');
-    document.getElementById('game-over-popup').classList.add('hidden');
+    // Reset UI elements
+    document.getElementById('message').textContent = '';
+    document.getElementById('message').classList.remove('correct', 'incorrect');
+    document.getElementById('user-input').value = '';
     
-    // Start new game
+    // Start a new game
     startLevel();
-    updateProgress();
 }
 
 // Add a function to set custom timer duration
