@@ -1,18 +1,18 @@
 :root {
     --red: #FF4B4B;
-    --yellow: #FFD700;
-    --green: #4CAF50;
-    --dark-blue: #1A237E;
-    --purple: #9C27B0;
-    --shadow: rgba(26, 35, 126, 0.3);
-    --gradient-start: #1A237E;
-    --gradient-end: #9C27B0;
-    --highlight: #FFD700;
+    --yellow: #F8D65D;
+    --green: #71CE72;
+    --dark-blue: #2C3E50;
+    --purple: #539CF5;
+    --shadow: rgba(83, 156, 245, 0.3);
+    --gradient-start: #539CF5;
+    --gradient-end: #71CE72;
+    --highlight: #F8D65D;
     --text-light: #FFFFFF;
-    --text-dark: #1A237E;
+    --text-dark: #2C3E50;
     --accent-1: #FF4B4B;
-    --accent-2: #4CAF50;
-    --accent-3: #FFD700;
+    --accent-2: #539CF5;
+    --accent-3: #F8D65D;
 }
 
 #welcome-screen, #rules-screen, #game-screen {
@@ -28,7 +28,7 @@
 html, body {
     height: 100%;
     min-height: 100%;
-    background-color: rgba(124, 77, 255, 0.7); /* lighter purple overlay */
+    background-color: rgba(83, 156, 245, 0.7); /* lighter blue overlay */
 }
 
 body {
@@ -38,7 +38,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text-light);
+    color: #1E3A8A;
     transition: background-color 0.5s ease;
     overflow-x: hidden;
     perspective: 1000px;
@@ -54,17 +54,15 @@ body::before {
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        45deg, 
-        #7C4DFF 0%, 
-        #B39DDB 25%, 
-        #EDE7F6 50%, 
-        #9C27B0 75%, 
-        #7C4DFF 100%
+        to right, 
+        #FFD700 0%, 
+        #32CD32 50%, 
+        #1E90FF 100%
     );
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     z-index: -2;
-    opacity: 0.5; /* Reduced opacity for better contrast */
+    opacity: 0.8; /* Increased opacity for better visibility */
 }
 
 @keyframes gradientBG {
@@ -163,53 +161,32 @@ body::before {
 
 /* Container for the welcome screen and game screen */
 .container {
-    background: linear-gradient(135deg, #7C4DFF, #9C27B0);
-    padding: 2.5rem;
-    border-radius: 15px;
-    box-shadow: 0 20px 50px var(--shadow), 
-                0 0 20px rgba(255, 248, 234, 0.2);
-    max-width: 500px;
     width: 90%;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
+    max-width: 500px;
+    padding: 2rem;
+    background: linear-gradient(to right, #FEE100, #7FFF00, #00BFFF);
+    border-radius: 20px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 248, 234, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    transition: box-shadow 0.3s ease;
 }
 
 .container:hover {
-    box-shadow: 0 25px 60px var(--shadow), 
-                0 0 30px rgba(255, 248, 234, 0.3);
-}
-
-.container:hover::before {
-    opacity: 1;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* Welcome screen style */
 #welcome-screen h1 {
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
+    color: #1E3A8A;
+    margin-bottom: 2.5rem;
     font-weight: 500;
     letter-spacing: 1px;
     position: relative;
     display: inline-block;
-    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
+    text-shadow: 0 2px 5px rgba(30, 58, 138, 0.3);
 }
 
 #welcome-screen h1::after {
@@ -222,20 +199,20 @@ body::before {
     height: 3px;
     background: var(--highlight);
     border-radius: 3px;
-    box-shadow: 0 2px 5px rgba(89, 69, 69, 0.3);
+    box-shadow: 0 2px 5px rgba(78, 205, 196, 0.3);
 }
 
 #welcome-screen p {
-    margin-bottom: 1.2rem;
+    margin-bottom: 2rem;
     line-height: 1.6;
-    color: rgba(255, 248, 234, 0.9);
+    color: #1E3A8A;
 }
 
 /* Input field and select box styles */
 input, select, button {
     width: 100%;
-    padding: 1rem;
-    margin-bottom: 1.2rem;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
     border: none;
     border-radius: 10px;
     font-size: 1rem;
@@ -243,33 +220,36 @@ input, select, button {
 }
 
 input, select {
-    background-color: rgba(89, 69, 69, 0.7);
-    color: var(--text-light);
-    border: 1px solid rgba(255, 248, 234, 0.3);
-    box-shadow: inset 0 2px 5px rgba(89, 69, 69, 0.3);
+    background-color: rgba(83, 156, 245, 0.3);
+    color: black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 2px 5px rgba(83, 156, 245, 0.3);
 }
 
 input:focus, select:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--highlight), 
-                inset 0 2px 5px rgba(89, 69, 69, 0.3);
-    border-color: var(--highlight);
+    box-shadow: 0 0 0 2px black, 
+                inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-color: black;
 }
 
 /* Button style */
 button {
-    background: var(--green);
-    color: white;
+    background: #90EE90;
+    color: #1E3A8A;
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 button:hover {
-    background: var(--yellow);
-    color: var(--dark-blue);
+    background: #7FCF7F;
+    color: #1E3A8A;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(144, 238, 144, 0.4);
 }
 
 /* Style for the password display box */
@@ -277,13 +257,12 @@ button:hover {
     font-size: 2.5rem;
     margin: 2rem 0;
     padding: 1.5rem;
-    background-color: rgba(89, 69, 69, 0.7);
+    background-color: white;
     border-radius: 15px;
     letter-spacing: 5px;
-    color: var(--highlight);
-    border: 1px solid rgba(255, 248, 234, 0.3);
-    box-shadow: 0 10px 25px rgba(89, 69, 69, 0.4), 
-                inset 0 2px 5px rgba(89, 69, 69, 0.3);
+    color: #8B5CF6;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -339,12 +318,12 @@ button:hover {
 .progress-container {
     width: 100%;
     height: 10px;
-    background-color: rgba(89, 69, 69, 0.7);
+    background-color: rgba(78, 205, 196, 0.3);
     border-radius: 10px;
     margin-top: 2rem;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 2px 5px rgba(89, 69, 69, 0.3);
+    box-shadow: inset 0 2px 5px rgba(78, 205, 196, 0.3);
     transform: translateZ(5px);
 }
 
@@ -404,7 +383,7 @@ button:hover {
     width: 100%;
     min-height: 100vh;
     height: auto;
-    background: linear-gradient(135deg, #7C4DFF, #9C27B0);
+    background: linear-gradient(to right, #FEE100, #7FFF00, #00BFFF);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -431,10 +410,10 @@ button:hover {
 .landing-title {
     font-size: 4rem;
     margin-bottom: 1.5rem;
-    color: var(--text-light);
+    color: #1E3A8A;
     font-weight: 700;
     letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(255, 248, 234, 0.5);
+    text-shadow: 0 0 10px rgba(30, 58, 138, 0.3);
     position: relative;
     display: inline-block;
     transform: translateZ(30px);
@@ -455,8 +434,8 @@ button:hover {
 
 /* Button at the bottom-right corner */
 .start-button {
-    background: var(--green);
-    color: white;
+    background: #90EE90;
+    color: #1E3A8A;
     border: none;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
@@ -466,22 +445,22 @@ button:hover {
     position: relative;
     overflow: hidden;
     z-index: 1;
-    box-shadow: 0 5px 15px var(--shadow);
-    transform: translateZ(10px);
+    box-shadow: 0 5px 15px rgba(144, 238, 144, 0.3);
+    font-weight: 600;
 }
 
 .start-button:hover {
-    background: var(--yellow);
-    color: var(--dark-blue);
-    transform: translateY(-3px) translateZ(15px);
-    box-shadow: 0 8px 20px var(--shadow);
+    background: #7FCF7F;
+    color: #1E3A8A;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(144, 238, 144, 0.4);
 }
 
 /* Description text animation */
 .landing-description {
     font-size: 1.3rem;
     margin-bottom: 2.5rem;
-    color: rgba(255, 248, 234, 0.9);
+    color: #1E3A8A;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -526,9 +505,9 @@ button:hover {
     }
 
     .container {
-        width: 90%;
-        padding: 18px 10px 18px 10px;
-        max-width: 360px;
+        width: 95%;
+        padding: 2rem 1.5rem;
+        max-width: 450px;
     }
 
     .landing-title {
@@ -564,6 +543,7 @@ button:hover {
     .landing-container {
         width: 100%;
         max-width: 400px;
+        padding: 2rem 1rem;
     }
 
     #rules-screen h1 {
@@ -590,7 +570,13 @@ button:hover {
 
 @media (max-width: 480px) {
     .container {
-        padding: 1.8rem 0.5rem 1.8rem 0.5rem;
+        padding: 1.5rem 1rem;
+        max-width: 400px;
+    }
+    
+    .landing-container {
+        max-width: 350px;
+        padding: 1.5rem 1rem;
     }
     
     .landing-title {
@@ -628,6 +614,21 @@ button:hover {
     display: none;
 }
 
+/* FontAwesome icons styling */
+.fas, .fa {
+    color: black !important;
+}
+
+.input-icon {
+    color: black !important;
+}
+
+/* Input placeholder styling */
+input::placeholder, select::placeholder {
+    color: black !important;
+    opacity: 0.7;
+}
+
 /* Popup styles */
 .popup {
     position: fixed;
@@ -635,7 +636,7 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(58, 25, 130, 0.8);
+    background-color: rgba(83, 156, 245, 0.8);
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
@@ -644,7 +645,7 @@ button:hover {
 }
 
 .popup-content {
-    background: linear-gradient(135deg, #7C4DFF, #9C27B0);
+    background: linear-gradient(135deg, #539CF5, #71CE72);
     padding: 2.5rem;
     border-radius: 20px;
     text-align: center;
@@ -687,59 +688,83 @@ button:hover {
 
 .popup-content button {
     margin-top: 20px;
-    background: var(--green);
-    color: white;
+    background: var(--yellow);
+    color: var(--dark-blue);
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .popup-content button:hover {
-    background: var(--yellow);
-    color: var(--dark-blue);
+    background: #FF8C00;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
 }
 
 /* Game screen specific styles */
+#game-screen {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFFDF7;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
 #game-screen h1 {
-    color: var(--highlight);
+    color: #1E3A8A;
     font-weight: 300;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
+    text-shadow: 0 2px 5px rgba(30, 58, 138, 0.3);
+    text-align: center;
 }
 
 #level-text {
-    color: var(--text-light);
+    color: #1E3A8A;
     font-size: 18px;
     margin-bottom: 20px;
     font-weight: 300;
+    text-align: center;
 }
 
 #user-greeting {
-    color: var(--highlight);
+    color: #1E3A8A;
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: 300;
-    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
+    text-shadow: 0 2px 5px rgba(30, 58, 138, 0.3);
+    text-align: center;
 }
 
 /* Rules screen specific styles */
 #rules-screen {
-    color: var(--text-light);
+    color: #1E3A8A;
+    background: #FFFDF7;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(30, 58, 138, 0.1);
+    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.1);
 }
 
 #rules-screen h1 {
-    color: var(--highlight);
+    color: #1E3A8A;
     font-weight: 300;
     letter-spacing: 1px;
     margin-bottom: 20px;
-    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
+    text-shadow: 0 2px 5px rgba(30, 58, 138, 0.3);
+    text-align: center;
 }
 
 #rules-screen p {
-    color: var(--text-light);
+    color: #1E3A8A;
     font-weight: 300;
     line-height: 1.6;
     margin-bottom: 15px;
@@ -749,7 +774,7 @@ button:hover {
     text-align: left;
     margin: 20px 0;
     padding-left: 20px;
-    color: var(--text-light);
+    color: #1E3A8A;
 }
 
 .difficulty-levels {
@@ -773,18 +798,36 @@ button:hover {
 }
 
 /* Welcome screen specific styles */
+#welcome-screen {
+    padding: 3rem 2rem;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #FFFDF7;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
 #welcome-screen h1 {
-    color: var(--highlight);
+    color: #1E3A8A;
     font-weight: 300;
     letter-spacing: 1px;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 5px rgba(89, 69, 69, 0.5);
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 5px rgba(30, 58, 138, 0.3);
+    text-align: center;
 }
 
 #welcome-screen p {
-    color: var(--text-light);
+    color: #1E3A8A;
     font-weight: 300;
     line-height: 1.6;
+    margin-bottom: 2.5rem;
+    text-align: center;
 }
 
 /* Add subtle animations */
@@ -829,19 +872,19 @@ button:hover {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: var(--purple);
-    color: var(--yellow);
+    background: #90EE90;
+    color: #1E3A8A;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-weight: bold;
-    box-shadow: 0 2px 10px var(--shadow);
+    box-shadow: 0 2px 10px rgba(144, 238, 144, 0.3);
     z-index: 10;
     transition: all 0.3s ease;
 }
 
 .level-badge:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px var(--shadow);
+    box-shadow: 0 4px 15px rgba(144, 238, 144, 0.4);
 }
 
 /* New feature: Success animation */
@@ -934,11 +977,11 @@ button:hover {
 /* Progress bar */
 .progress-bar {
     height: 8px;
-    background-color: rgba(89, 69, 69, 0.7);
+    background-color: rgba(83, 156, 245, 0.3);
     border-radius: 4px;
     overflow: hidden;
     margin: 0;
-    box-shadow: inset 0 2px 5px rgba(89, 69, 69, 0.3);
+    box-shadow: inset 0 2px 5px rgba(83, 156, 245, 0.3);
 }
 
 .progress-bar-fill {

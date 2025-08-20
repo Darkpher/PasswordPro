@@ -19,6 +19,14 @@ let isPopupVisible = false;
 // High contrast mode state
 let isHighContrastMode = false;
 
+// Helper function to hide all pages
+function hideAllPages() {
+    document.getElementById("landing-page").style.display = "none";
+    document.getElementById("welcome-screen").style.display = "none";
+    document.getElementById("rules-screen").style.display = "none";
+    document.getElementById("game-screen").style.display = "none";
+}
+
 // Reset form fields when page loads
 window.addEventListener('DOMContentLoaded', function() {
     // Reset input fields
@@ -27,10 +35,8 @@ window.addEventListener('DOMContentLoaded', function() {
     document.getElementById("gender").selectedIndex = 0;
 
     // Make sure only the landing page is visible
+    hideAllPages();
     document.getElementById("landing-page").style.display = "flex";
-    document.getElementById("welcome-screen").style.display = "none";
-    document.getElementById("rules-screen").style.display = "none";
-    document.getElementById("game-screen").style.display = "none";
     
     // Add event listener for hint button
     document.getElementById('hint-btn').addEventListener('click', function() {
@@ -51,6 +57,8 @@ window.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('highContrastMode') === 'true') {
         enableHighContrast();
     }
+    
+    console.log("Page loaded - only landing page visible");
 });
 
 // Function to toggle high contrast mode
@@ -84,10 +92,16 @@ function disableHighContrast() {
 
 document.getElementById("start-button").addEventListener("click", function() {
     console.log("Start button clicked");
-    // Hide the landing page
-    document.getElementById("landing-page").style.display = "none";
-    // Show the welcome screen
+    // Hide all pages and show welcome screen
+    hideAllPages();
     document.getElementById("welcome-screen").style.display = "block";
+    
+    // Add enter key event listener for name input after welcome screen is shown
+    document.getElementById("name").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            startGame();
+        }
+    });
 });
 
 // Function to start the game after entering details
@@ -101,25 +115,43 @@ function startGame() {
     
     console.log("Switching from Welcome Screen to Rules Screen");
     
-    // Hide welcome screen
-    document.getElementById("welcome-screen").style.display = "none";
-    
-    // Show rules screen
-    const rulesScreen = document.getElementById("rules-screen");
-    rulesScreen.style.display = "block";
+    // Hide all pages and show rules screen
+    hideAllPages();
+    document.getElementById("rules-screen").style.display = "block";
     
     // Log for debugging
     console.log("Rules screen should now be visible");
+}
+
+// Function to show welcome screen (missing function)
+function showWelcomeScreen() {
+    // Hide all pages and show welcome screen
+    hideAllPages();
+    document.getElementById("welcome-screen").style.display = "block";
+    
+    // Reset the name input
+    document.getElementById("name").value = "";
+    
+    // Reset game state
+    currentLevelIndex = 0;
+    currentPassword = "";
+    userName = "";
+    hintsUsed = 0;
+    attempts = 0;
+    correctAttempts = 0;
+    
+    // Stop any running timers
+    stopTimer();
+    
+    console.log("Returned to welcome screen");
 }
 
 function showGame() {
     // Set a fixed timer duration
     setTimerDuration(15);
     
-    // Hide rules screen
-    document.getElementById('rules-screen').style.display = 'none';
-    
-    // Show game screen
+    // Hide all pages and show game screen
+    hideAllPages();
     document.getElementById('game-screen').style.display = 'block';
     
     // Set user greeting
@@ -448,8 +480,13 @@ function restartGame() {
     document.getElementById('message').classList.remove('correct', 'incorrect');
     document.getElementById('user-input').value = '';
     
+    // Reset progress bar
+    document.getElementById("progress-bar").style.width = "0%";
+    
     // Start a new game
     startLevel();
+    
+    console.log("Game restarted");
 }
 
 // Add a function to set custom timer duration
@@ -655,8 +692,10 @@ function showSecurityTips() {
 // Function to finish the game
 function finishGame() {
     document.getElementById('security-tips-popup').classList.add('hidden');
+    
+    // Hide all pages and show landing page
+    hideAllPages();
     document.getElementById('landing-page').style.display = 'flex';
-    document.getElementById('game-screen').style.display = 'none';
     
     // Reset game state
     currentLevelIndex = 0;
@@ -665,4 +704,9 @@ function finishGame() {
     hintsUsed = 0;
     attempts = 0;
     correctAttempts = 0;
+    
+    // Stop any running timers
+    stopTimer();
+    
+    console.log("Returned to landing page");
 }
